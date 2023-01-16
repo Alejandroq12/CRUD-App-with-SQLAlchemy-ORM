@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:4991@localhost:5432/postgres'
+
 db = SQLAlchemy(app)
 
 class Person(db.Model):
@@ -11,6 +12,15 @@ class Person(db.Model):
     name = db.Column(db.String(), nullable=False)
 
 
+with app.app_context():
+    db.create_all()
+
+
 @app.route('/')
 def index():
     return 'Hello, World!'
+
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='0.0.0.0', port=3000)
