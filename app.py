@@ -19,7 +19,8 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    person = Person.query.first()
+    return 'Hello ' + person.name
 
 
 if __name__ == '__main__':
