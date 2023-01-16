@@ -32,14 +32,23 @@ Before running you must install:
 Before running:
 
 - A server using postgreSQL must be running, and it has to have this specifications: 
+
 dialect: postgresql;
+
 username: postgres;
+
 password: 4991;
+
 host: localhost;
+
 port: 5432
+
 Database: postgres.
+
 Example:
+
 dialect://username:password@host:port/database 
+
 Example with the correct configuration: postgresql://postgres:4991@localhost:5432/postgres
 
 If you want to change those settings just go to app.py and on line 5 you can do that.
