@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import sqlalchemy as sa
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:4991@localhost:5432/postgres'
@@ -9,12 +10,23 @@ db = SQLAlchemy(app)
 
 class Person(db.Model):
     __tablename__ = 'persons'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(), nullable=False)
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String(), nullable=False)
 
+    def __repr__(self):
+        return f'<Person ID: {self.id}, name: {self.name}>'
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String(), nullable=False)
+
+    def __repr__(self):
+        return f'<User {self.id}, {self.name}>'
 
 with app.app_context():
     db.create_all()
+
 
 
 @app.route('/')
