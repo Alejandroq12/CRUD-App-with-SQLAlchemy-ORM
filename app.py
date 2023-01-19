@@ -4,10 +4,10 @@ import sqlalchemy as sa
 from flask_migrate import Migrate
 
 app = Flask(__name__, static_folder='static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:4991@localhost:5432/postgres'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:4991@localhost:5432/todoapp'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
@@ -20,8 +20,26 @@ class Todo(db.Model):
     return f'<Todo {self.id} {self.description}>'
 
 
-with app.app_context():
-    db.create_all()
+@app.route('/todos/create', methods=['POST'])
+def create_todo():
+  error = False
+  body = {}
+  try:
+    description = request.form.get_json()['description']
+    todo = Todo(description=description)
+    db.session.add(todo)
+    db.session.commit()
+    body['description'] = todo.description
+  except:
+    error = True
+    db.session.rollback()
+    print(sys.exc_info())
+  finally:
+    db.session.close()
+  if error:
+    abort (400)
+  else:
+    return jsonify(body)
 
 
 @app.route('/')
