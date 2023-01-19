@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+<body>
+    <div id="error" class="hidden">Something went wrong!</div>
+    <form id="form" method="post" action="/todos/create">
+      <input type="text" id="description" name="description" />
+      <input type="submit" value="Create" />
+    </form>
+    <ul id="todos">
+        {% for d in data %}
+        <li>{{ d.description }}</li>
+        {% endfor %}
+    </ul>
+    
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
