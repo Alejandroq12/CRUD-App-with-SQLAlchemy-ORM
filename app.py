@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy as sa
 from flask_migrate import Migrate
+import sys
+from flask import abort
+from flask import jsonify
+
 
 app = Flask(__name__, static_folder='static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:4991@localhost:5432/todoapp'
@@ -15,6 +19,7 @@ class Todo(db.Model):
   __tablename__ = 'todos'
   id = db.Column(db.Integer, primary_key=True)
   description = db.Column(db.String(), nullable=False)
+  completed = db.Column(db.Boolean, nullable=False, default=False)
 
   def __repr__(self):
     return f'<Todo {self.id} {self.description}>'
@@ -25,7 +30,7 @@ def create_todo():
   error = False
   body = {}
   try:
-    description = request.form.get_json()['description']
+    description = request.get_json()['description']
     todo = Todo(description=description)
     db.session.add(todo)
     db.session.commit()
