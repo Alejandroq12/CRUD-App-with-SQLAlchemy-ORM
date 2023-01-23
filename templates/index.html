@@ -8,17 +8,21 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div id="error" class="hidden">Something went wrong!</div>
-    <form id="form" method="post" action="/todos/create">
-      <input type="text" id="description" name="description" />
-      <input type="submit" value="Create" />
+    <form id="form">
+        <input type="text" id="description" name="description"/>
+        <input type="submit" value="Create"/>
     </form>
-    <ul id="todos">
-        {% for d in data %}
-        <li>{{ d.description }}</li>
-        {% endfor %}
-    </ul>
-    
+    <div id="error" class="hidden">Something went wrong!</div>
+        <ul id="todos">
+            {% for d in data %}
+            <li>
+            <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked {% endif %}/>
+            {{ d.description }}
+            <button class="delete-button" data-id="{{ d.id }}">&cross;</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
