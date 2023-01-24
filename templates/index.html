@@ -8,17 +8,30 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <div class="lists-wrapper">
+      <ul id="lists">
+        {% for list in lists %}
+        <li>
+            <a href="/lists/{{ list.id }}">
+                {{ list.name}}
+            </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="todos-wrapper">
+        <h3>{{ active_list.name }}</h3>
     <form id="form">
         <input type="text" id="description" name="description"/>
         <input type="submit" value="Create"/>
     </form>
     <div id="error" class="hidden">Something went wrong!</div>
         <ul id="todos">
-            {% for d in data %}
+            {% for todo in todos %}
             <li>
-            <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked {% endif %}/>
-            {{ d.description }}
-            <button class="delete-button" data-id="{{ d.id }}">&cross;</button>
+            <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked {% endif %}/>
+            {{ todo.description }}
+            <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
             </li>
             {% endfor %}
         </ul>
