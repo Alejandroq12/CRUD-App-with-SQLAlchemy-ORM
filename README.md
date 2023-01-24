@@ -1,6 +1,5 @@
-This app is nos finished! I am working hard to make it better...
 ----------------------------------------------------------------
-# Hello-App-with-Flask-SQLAlchemy
+# CRUD App with SQLAlchemy ORM
 This app was created with Flask, SQLAlchemy and Python. The objective is to connect this app to my database.
 
 --------------------------------------------------------------
@@ -9,7 +8,7 @@ To run this app on Windows you can use PowerShell.
 
 1- With PowerShell go to the folder in which this app is located.
 
-2- Run the following command: python flask_hello_app.py
+2- Run the following command: python app.py
 
 3-To quit you must press CTRL + C
 
@@ -57,12 +56,11 @@ If you want to change those settings just go to app.py and on line 5 you can do 
 
 -----------------------------------------------------------------
 Important:
-When you run this app a database called "persons" will be created.
-
+You need to create a data base called "crudapp5" before running. Remember that you can chose your own name.
 --------------------------------------------------------------------
 Note: 
 
-I had a problem wehn running from the terminal with "db.create.all()". I fixed that problem this way:
+I had a problem when running from the terminal with "db.create.all()". I fixed that problem this way:
 
 Whatched this video: https://www.youtube.com/watch?v=Ny1g-Wk5nyM
 
