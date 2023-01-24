@@ -8,34 +8,50 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="lists-wrapper">
-      <ul id="lists">
-        {% for list in lists %}
-        <li>
-            <a href="/lists/{{ list.id }}">
-                {{ list.name}}
-            </a>
-        </li>
-        {% endfor %}
+  <section id="container">   
+  <div class="lists-wrapper">
+      <h3>Create Main List</h3>
+      <div id="m-error" class="main-error"> something wrongg!!</div>
+      <form id="form-create-list">
+          <input type="text" name="lst-description" id="lst-desc" />
+          <input type="submit" name="btnCreateLst" value="Create List" />
+      </form>
+      <ul id="lists" class="lst-main">
+          {% for list in lists %}
+          <li>
+             <input type="checkbox" class="lst-check-completed" data-id="{{list.id}}" 
+                  {% if list.completed %} checked {% endif %} />
+              <a href="/lists/{{list.id}}">
+                  {{list.name}}
+              </a>
+              <button class="delete-list-btn" data-id="{{list.id}}">&cross;</button>                    
+          </li>
+          {% endfor %}
       </ul>
-    </div>
-    <div class="todos-wrapper">
-        <h3>{{ active_list.name }}</h3>
-    <form id="form">
-        <input type="text" id="description" name="description"/>
-        <input type="submit" value="Create"/>
-    </form>
-    <div id="error" class="hidden">Something went wrong!</div>
-        <ul id="todos">
-            {% for todo in todos %}
-            <li>
-            <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked {% endif %}/>
-            {{ todo.description }}
-            <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+  </div>
+  
+  <div class="todos-wrapper">
+      <div id="active-list-id" data-id="{{active_list.id}}">
+          <h4 >{{active_list.name}}</h4>
+      </div>
+      <form id="form">
+          <input type="text" name="description" id="desc"/>
+          <input type="submit" name="btnSubmit" value="Create"/>
+      </form>
+      <div id="error" class="hidden"> something wrongg!!</div>
+      <ul id="todos">
+          {% for d in todos %}
+          <li><input type="checkbox" class="check-completed" data-id="{{d.id}}"
+               {% if d.completed %} checked {% endif %}/>{{d.description}}
+               <button class="delete-btn" data-id="{{d.id}}">&cross;</button>
+          </li>
+          {%endfor%}
+      </ul>
+  </div>   
+  </section>  
+    
+    
+    
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

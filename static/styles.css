@@ -1,25 +1,128 @@
-.hidden {
-    display: none;
+body{
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #11967c;
+  padding: 20px;
+}
+
+.hidden{
+  display:none;
+}
+.main-error{
+  display:none;
+}
+ul{
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 300px;
+}
+
+#lists, #todos {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#lists li, #todos li {
+  margin-bottom: 10px;
+}
+h3, h4 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: #1237a5;
+  text-shadow: 2px 2px #333333;
+  text-align: center;
   }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 300px;
+  
+  h3{
+  margin-top: 50px;
   }
-  li {
-    clear: both;
+  
+  h4{
+  margin-bottom: 40px;
   }
-  li button {
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-    color: red;
-    float: right;
+input[type="text"] {
+  padding: 15px;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 10px gray;
+  transition: all .3s ease;
+  }
+  input[type="text"]:focus {
+  box-shadow: 0 0 20px blue;
+  }
+  input[type="submit"] {
+  padding: 10px 10px;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2em;
+  text-align: center;
+  background-color: #11967c;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 10px gray;
+  transition: all .3s ease;
+  }
+  input[type="submit"]:hover {
+  background-color: #1237a5;
+  box-shadow: 0 0 20px blue;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 10px;
+    -webkit-appearance: none; 
+    width: 20px; 
+    height: 20px;
+    border-radius: 5px; 
+    border: 2px solid gray; 
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input[type="checkbox"]:checked {
+    border-color: blue;
+    background-color: blue;
+  }
+  
+  input[type="checkbox"]:hover {
+    border-color: blue;
+  }
+  .delete-list-btn, .delete-btn {
+    background-color: #F44336; 
+    color: white;
+    padding: 8px 12px; 
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 20px;
+    font-weight: 500; 
+    float: right;
+    transition: background-color 0.3s ease-in-out; 
+    }
+    
+    .delete-list-btn:hover, .delete-btn:hover {
+    background-color: #E53935; 
+    }
+    
+    .delete-list-btn:active, .delete-btn:active {
+    background-color: #D32F2F; 
+    }
+
+@media (max-width: 600px) {
+  .container {
+    flex-wrap: wrap;
   }
   .lists-wrapper, .todos-wrapper {
-    display: inline-block;
-    vertical-align: top;
+    width: 100%;
   }
+}
